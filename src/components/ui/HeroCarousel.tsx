@@ -50,7 +50,7 @@ export default function HeroCarousel() {
   return (
     // FIX 1: Tinggi HP 50vh (setengah layar), Laptop 600px
     // FIX 2: Margin atas (mt) disesuaikan biar pas sama navbar
-    <div className="max-w-[1400px] h-[50vh] md:h-[600px] w-full m-auto relative group mt-[80px]"> 
+    <div className="max-w-[1400px] h-[50vh] md:h-[600px] w-full m-auto relative group mt-28 md:mt-32"> 
       
       {/* Gambar Background */}
       <div
