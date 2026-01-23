@@ -1,4 +1,3 @@
-import Footer from "@/components/ui/Footer";
 import HeroCarousel from "@/components/ui/HeroCarousel";
 import BestSeller from "@/components/ui/BestSeller";
 import Testimonials from "@/components/ui/Testimonials";
@@ -17,8 +16,6 @@ export default function Home() {
       <AboutSection />
 
       <Testimonials />
-
-      <Footer />
 
     </main>
   );

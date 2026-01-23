@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-// Data Dummy Gambar
 const slides = [
   {
     id: 1,
@@ -48,22 +47,15 @@ export default function HeroCarousel() {
   }, [currentIndex]);
 
   return (
-    // FIX 1: Tinggi HP 50vh (setengah layar), Laptop 600px
-    // FIX 2: Margin atas (mt) disesuaikan biar pas sama navbar
     <div className="max-w-[1400px] h-[50vh] md:h-[600px] w-full m-auto relative group mt-28 md:mt-32"> 
       
-      {/* Gambar Background */}
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        // FIX 3: Rounded cuma di Laptop (md:rounded), di HP kotak full (rounded-none) biar rapi
         className="w-full h-full rounded-none md:rounded-2xl bg-center bg-cover duration-500 ease-in-out relative flex items-center justify-center"
       >
-        {/* Overlay Gelap */}
         <div className="absolute inset-0 bg-black/40 md:rounded-2xl"></div>
 
-        {/* Text Content */}
         <div className="relative z-10 text-center text-white px-4 max-w-2xl mx-auto">
-            {/* FIX 4: Font size responsif. HP kecil, Laptop gede */}
             <h1 className="text-3xl md:text-6xl font-bold mb-2 md:mb-4 drop-shadow-lg leading-tight">
                 {slides[currentIndex].title}
             </h1>
@@ -76,17 +68,14 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      {/* Tombol Kiri (Disembunyikan di HP biar bersih) */}
       <div className="hidden md:block group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer hover:bg-black/50 transition">
         <ChevronLeft onClick={prevSlide} size={30} />
       </div>
 
-      {/* Tombol Kanan */}
       <div className="hidden md:block group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer hover:bg-black/50 transition">
         <ChevronRight onClick={nextSlide} size={30} />
       </div>
 
-      {/* Dots Indicator */}
       <div className="absolute bottom-4 left-0 right-0 flex justify-center py-2 gap-2">
         {slides.map((slide, slideIndex) => (
           <div

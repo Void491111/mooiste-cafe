@@ -1,36 +1,38 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
+
 import Navbar from "@/components/layout/navbar";
+import Footer from "@/components/layout/Footer"; 
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair", 
-});
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Mooiste Cafe",
-  description: "Kopikap enak"
-}
+  description: "Best Coffee in Town",
+};
 
 export default function RootLayout({
-  children, 
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body className={'${jakarta.classname} ${playfair.variable} antialiased bg-[FDFBF7] text-stone-800'}>
-        <Navbar/>
-        {children}
+      {/* 👇 1. KUNCI PERTAMA: Tambah "min-h-screen flex flex-col" di sini */}
+      <body className={`${inter.className} min-h-screen flex flex-col`}>
+        
+        <Navbar />
+        
+        {/* 👇 2. KUNCI KEDUA: Bungkus children pake "flex-1" */}
+        {/* Ini perintah buat konten: "Isi semua ruang kosong yang tersisa!" */}
+        <main className="flex-1">
+          {children}
+        </main>
+
+        <Footer />
+        
       </body>
     </html>
   );
 }
-
-
