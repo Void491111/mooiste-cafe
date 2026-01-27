@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 
 interface CartItem {
@@ -16,7 +16,6 @@ interface CartDrawerProps {
   onClose: () => void;
 }
 
-// Data Dummy Awal
 const initialItems: CartItem[] = [
   {
     id: 1,
@@ -40,7 +39,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   // Fungsi Tambah Qty
   const increaseQty = (id: number) => {
     setItems(items.map(item => item.id === id ? { ...item, qty: item.qty + 1 } : item));
-  };
+  };  
 
   // Fungsi Kurang Qty
   const decreaseQty = (id: number) => {
@@ -53,6 +52,18 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   const removeItem = (id: number) => {
     setItems(items.filter(item => item.id !== id));
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    return () => {
+      document.body.style = 'unset';
+    };
+  }, [isOpen]);
 
   // Hitung Total
   const subtotal = items.reduce((acc, item) => acc + (item.price * item.qty), 0);

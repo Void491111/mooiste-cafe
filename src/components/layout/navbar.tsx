@@ -1,5 +1,6 @@
 "use client"
 
+
 import { useState } from "react";
 import Link from "next/link";
 import { ShoppingBag, Menu, X, Info } from "lucide-react";
@@ -22,7 +23,7 @@ const navLinks: NavLink[] = [
 export default function Navbar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
     const [showInfoModal, setShowInfoModal] = useState<boolean>(false);
-    const [showCart, setShowCart] = useState<boolean>(false); // 2. State buat Cart
+    const [showCart, setShowCart] = useState<boolean>(false); 
 
     return (
         <>
@@ -47,13 +48,11 @@ export default function Navbar() {
                         <div className="h-6 w-px bg-stone-300 mx-2"></div>
 
                         <div className="flex items-center gap-4">
-                            {/* 3. Button Cart Diklik -> setShowCart(true) */}
                             <button 
                                 onClick={() => setShowCart(true)}
                                 className="p-2 hover:bg-stone-100 rounded-full transition text-stone-600 relative"
                             >
                                 <ShoppingBag className="w-5 h-5" />
-                                {/* Optional: Badge Merah (Jumlah Item) */}
                                 <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
                             </button>
 
@@ -78,7 +77,6 @@ export default function Navbar() {
                 </div>
             </nav>
 
-            {/* Mobile Sidebar */}
             <div 
                 className={`fixed inset-0 bg-black/50 z-50 transition-opacity duration-300 lg:hidden ${
                     isSidebarOpen ? "opacity-100 visible" : "opacity-0 invisible"
@@ -124,7 +122,6 @@ export default function Navbar() {
                 </div>
             </div>
 
-            {/* 4. Render Component Modal & Cart */}
             <InfoModal 
                 isOpen={showInfoModal} 
                 onClose={() => setShowInfoModal(false)} 
