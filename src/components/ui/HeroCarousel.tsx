@@ -62,9 +62,7 @@ export default function HeroCarousel() {
             <p className="text-sm md:text-2xl font-light drop-shadow-md opacity-90">
                 {slides[currentIndex].desc}
             </p>
-            <button className="mt-4 md:mt-8 px-6 py-2 md:px-8 md:py-3 text-sm md:text-base bg-stone-900 hover:bg-stone-700 text-white rounded-full font-medium transition duration-300 shadow-lg border border-stone-700">
-                Order Sekarang
-            </button>
+            
         </div>
       </div>
 

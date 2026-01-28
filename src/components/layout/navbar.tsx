@@ -1,7 +1,6 @@
 "use client"
 
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ShoppingBag, Menu, X, Info } from "lucide-react";
 import InfoModal from "../ui/infoModal";
@@ -25,8 +24,23 @@ export default function Navbar() {
     const [showInfoModal, setShowInfoModal] = useState<boolean>(false);
     const [showCart, setShowCart] = useState<boolean>(false); 
 
+    // FIX: Mengunci scroll (Disable Body Scroll) saat Sidebar, Modal, atau Cart terbuka
+    useEffect(() => {
+        if (isSidebarOpen || showInfoModal || showCart) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        // Cleanup saat component unmount
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isSidebarOpen, showInfoModal, showCart]);
+
     return (
         <>
+            {/* --- Main Navbar --- */}
             <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-stone-100 z-50 h-20">
                 <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
                     
@@ -34,6 +48,7 @@ export default function Navbar() {
                         Mooiste<span className="text-stone-400">Cafe</span>
                     </Link>
 
+                    {/* Desktop Menu */}
                     <div className="hidden lg:flex items-center gap-8">
                         {navLinks.map((link) => (
                             <Link
@@ -66,6 +81,7 @@ export default function Navbar() {
                         </div>
                     </div>
 
+                    {/* Mobile Menu Button */}
                     <div className="lg:hidden flex items-center gap-4">
                         <button onClick={() => setShowCart(true)}>
                             <ShoppingBag className="w-5 h-5 text-stone-600" />
@@ -77,14 +93,17 @@ export default function Navbar() {
                 </div>
             </nav>
 
+            {/* --- Mobile Sidebar Overlay (Background Gelap) --- */}
             <div 
                 className={`fixed inset-0 bg-black/50 z-50 transition-opacity duration-300 lg:hidden ${
                     isSidebarOpen ? "opacity-100 visible" : "opacity-0 invisible"
                 }`}
                 onClick={() => setIsSidebarOpen(false)}
+                aria-hidden="true"
             />
 
-            <div className={`fixed top-0 right-0 h-full w-[300px] bg-white z-[60] shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col ${
+            {/* --- Mobile Sidebar Drawer --- */}
+            <div className={`fixed top-0 right-0 h-[100dvh] w-[300px] bg-white z-[60] shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col ${
                     isSidebarOpen ? "translate-x-0" : "translate-x-full"
                 }`}
             >
@@ -95,7 +114,7 @@ export default function Navbar() {
                     </button>
                 </div>
 
-                <div className="flex flex-col p-6 gap-2">
+                <div className="flex flex-col p-6 gap-2 overflow-y-auto">
                     {navLinks.map((link) => (
                         <Link 
                             key={link.name}
@@ -122,6 +141,7 @@ export default function Navbar() {
                 </div>
             </div>
 
+            {/* --- Modals --- */}
             <InfoModal 
                 isOpen={showInfoModal} 
                 onClose={() => setShowInfoModal(false)} 
