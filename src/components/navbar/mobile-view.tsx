@@ -1,4 +1,3 @@
-// src/components/navbar/mobile-view.tsx
 import Link from "next/link";
 import { ShoppingBag, Menu, X, Info } from "lucide-react";
 import { navLinks } from "./navbar.data";
@@ -13,7 +12,6 @@ interface MobileViewProps {
 export default function MobileView({ isOpen, setIsOpen, onOpenCart, onOpenInfo }: MobileViewProps) {
     return (
         <>
-            {/* Tombol Burger & Cart Mobile */}
             <div className="lg:hidden flex items-center gap-4">
                 <button onClick={onOpenCart} className="active:scale-95">
                     <ShoppingBag className="w-5 h-5 text-stone-600" />
@@ -22,8 +20,6 @@ export default function MobileView({ isOpen, setIsOpen, onOpenCart, onOpenInfo }
                     <Menu className="w-7 h-7 text-stone-900" />
                 </button>
             </div>
-
-            {/* Overlay Gelap */}
             <div 
                 className={`fixed inset-0 bg-black/50 z-50 transition-opacity duration-300 lg:hidden ${
                     isOpen ? "opacity-100 visible" : "opacity-0 invisible"
@@ -31,7 +27,7 @@ export default function MobileView({ isOpen, setIsOpen, onOpenCart, onOpenInfo }
                 onClick={() => setIsOpen(false)}
             />
 
-            {/* Sidebar Drawer */}
+            {/* sleding */}
             <div className={`fixed top-0 right-0 h-[100dvh] w-[300px] bg-white z-[60] shadow-2xl transform transition-transform duration-300 lg:hidden flex flex-col ${
                 isOpen ? "translate-x-0" : "translate-x-full"
             }`}>
